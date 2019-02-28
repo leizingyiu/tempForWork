@@ -1,0 +1,117 @@
+<html>
+
+<head>
+
+    <script>
+        window.onload = function() {
+            setLayer("layer", "data-distance");
+        }
+
+        function setLayer(layerName, distName) {
+            var layer = document.getElementsByClassName(layerName);
+            var dName = typeof distName === "string" ? distName : "distance";
+            var rotaA = 0;
+            var rotaB = 0;
+            var rotaG = 0;
+            var rotaA0 = 0;
+            var rotaB0 = 0;
+            var rotaG0 = 0;
+            var nowA = 0;
+            var nowB = 0;
+            var nowG = 0;
+            var makeInitial = false;
+            var dist = [];
+            for (var i = 0; i < layer.length; i++) {
+                dist[i] = Number(layer[i].getAttribute(dName));
+            }
+            window.addEventListener("deviceorientation", orientationHandler, false);
+            /* https://uiiiuiii.com/designer/leizingyiu */
+            function orientationHandler(event) {
+
+                if (makeInitial === false) {
+                    rotaA0 = event.alpha > 180 ? event.alpha - 180 : event.alpha;
+                    rotaB0 = event.beta;
+                    rotaG0 = event.gamma;
+                    makeInitial = true;
+                }
+                rotaA = (event.alpha > 180 ? event.alpha - 180 : event.alpha) - rotaA0;
+                rotaB = event.beta - rotaB0 + 90;
+                rotaG = event.gamma - rotaG0;
+                nowA = rotaA / 360;
+                nowB = rotaB < -90 && rotaB > -180 ? (rotaB + 270) / 360 : (rotaB - 90) / 360;
+                nowG = rotaG / 360;
+                for (var i = 0; i < layer.length; i++) {
+                    var moveX = (nowG * dist[i]);
+                    var moveY = (nowB * dist[i]);
+                    layer[i].setAttribute("style", "transform:translate(" + moveX + "vw," + moveY + "vh);")
+                }
+            }
+        }
+
+    </script>
+
+</head>
+
+<body></body>
+
+</html>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 750 1334" style="enable-background:new 0 0 750 1334;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.6;fill:url(#SVGID_1_);enable-background:new    ;}
+	.st1{opacity:0.7;}
+	.st2{font-family:'SourceHanSansSC-Normal-GBpc-EUC-H';}
+	.st3{font-size:16px;}
+	.st4{letter-spacing:1;}
+</style>
+<g id="图层_10">
+	
+		<image style="overflow:visible;enable-background:new    ;" width="1240" height="2205" xlink:href="A146E65E.jpg"  transform="matrix(0.6048 0 0 0.6048 0.0718 0.2929)">
+	</image>
+</g>
+<g id="bgBlack">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="17.5453" y1="1344.1298" x2="732.4547" y2="105.8702" gradientTransform="matrix(-1 0 0 1 750 0)">
+		<stop  offset="0" style="stop-color:#000000;stop-opacity:0.95"/>
+		<stop  offset="1" style="stop-color:#000000;stop-opacity:0.7"/>
+	</linearGradient>
+	<polygon class="st0" points="0,116 750,116 750,1334 0,1334 	"/>
+</g>
+<g id="bg">
+	
+		<image style="overflow:visible;enable-background:new    ;" width="1488" height="2566" xlink:href="img/mob_bg@1.5x.png"  transform="matrix(0.6667 0 0 0.6667 -121 -188.3334)">
+	</image>
+</g>
+<g id="sp" data-distance="-20" >
+	
+		<image style="overflow:visible;enable-background:new    ;" width="1019" height="802" xlink:href="img/mob_spr@1.5x.png"  transform="matrix(0.6667 0 0 0.6667 42 366)">
+	</image>
+</g>
+<g id="tit" data-distance="-10">
+	
+		<image style="overflow:visible;enable-background:new    ;" width="1302" height="1389" xlink:href="img/mob_ttl@1.5x.png"  transform="matrix(0.6667 0 0 0.6667 -40 224)">
+	</image>
+</g>
+<g id="con">
+	
+		<image style="overflow:visible;enable-background:new    ;" width="1461" height="1613" xlink:href="img/mob_con@1.5x.png"  transform="matrix(0.6667 0 0 0.6667 -112 388)">
+	</image>
+</g>
+<g id="btn">
+	
+		<image style="overflow:visible;enable-background:new    ;" width="750" height="392" xlink:href="img/mob_btn@1.5x.png"  transform="matrix(0.6667 0 0 0.6667 125 967)">
+	</image>
+</g>
+<g id="con1" data-distance="20">
+	
+		<image style="overflow:visible;enable-background:new    ;" width="818" height="813" xlink:href="img/mob_con1@1.5x.png"  transform="matrix(0.6667 0 0 0.6667 -170 307)">
+	</image>
+</g>
+<g id="con2" data-distance="40">
+	
+		<image style="overflow:visible;enable-background:new    ;" width="804" height="801" xlink:href="img/mob_con2@1.5x.png"  transform="matrix(0.6667 0 0 0.6667 345 564)">
+	</image>
+</g>
+<text transform="matrix(1 0 0 1 695.4399 154.0801)" class="st1 st2 st3 st4">关闭</text>
+</svg>
